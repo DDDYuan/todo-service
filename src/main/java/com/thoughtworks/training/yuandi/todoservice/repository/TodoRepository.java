@@ -11,9 +11,9 @@ public class TodoRepository {
 
     public List<Todo> list() {
         return Arrays.asList(
-                new Todo(1, "content1"),
-                new Todo(2, "content2"),
-                new Todo(3, "content3")
+                new Todo(1, "todo item 1", false),
+                new Todo(2, "todo item 2", true),
+                new Todo(3, "todo item 3", false)
         );
     }
 }

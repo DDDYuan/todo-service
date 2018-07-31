@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>TodoList</title>
+</head>
+<body>
+<div>
+    <table>
+        <thead>
+        <th>ID</th>
+        <th>CONTENT</th>
+        </thead>
+        <tbody th:each="todo : ${todos}">
+        <tr>
+            <td th:text="${todo.id}">ID</td>
+            <td th:text="${todo.content}">CONTENT</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

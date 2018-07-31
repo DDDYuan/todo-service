@@ -1,24 +1,24 @@
 package com.thoughtworks.training.yuandi.todoservice.controller;
 
+import com.thoughtworks.training.yuandi.todoservice.model.Todo;
 import com.thoughtworks.training.yuandi.todoservice.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-public class TodoController {
+import java.util.List;
 
+@RestController
+public class TodoAPI {
     private final TodoService todoService;
 
     @Autowired
-    public TodoController(TodoService todoService) {
+    public TodoAPI(TodoService todoService) {
         this.todoService = todoService;
     }
 
-    @GetMapping(path = "/todolist")
-    public String showList(Model model) {
-        model.addAttribute("todos", todoService.getAll());
-        return "todos";
+    @GetMapping(path = "/todos")
+    public List<Todo> getTodoList() {
+        return todoService.getAll();
     }
 }

@@ -7,12 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class TodoListController {
+public class TodoController {
 
     private final TodoService todoService;
 
     @Autowired
-    public TodoListController(TodoService todoService) {
+    public TodoController(TodoService todoService) {
         this.todoService = todoService;
     }
 

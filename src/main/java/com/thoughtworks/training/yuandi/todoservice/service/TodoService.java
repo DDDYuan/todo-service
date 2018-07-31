@@ -10,8 +10,12 @@ import java.util.List;
 @Service
 public class TodoService {
 
+    private final TodoRepository todoRepository;
+
     @Autowired
-    private TodoRepository todoRepository;
+    public TodoService(TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
+    }
 
     public List<Todo> getAll() {
         return todoRepository.list();

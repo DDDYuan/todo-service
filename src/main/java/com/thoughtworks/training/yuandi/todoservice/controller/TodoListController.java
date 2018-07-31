@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TodoListController {
 
+    private final TodoService todoService;
+
     @Autowired
-    private TodoService todoService;
+    public TodoListController(TodoService todoService) {
+        this.todoService = todoService;
+    }
 
     @GetMapping(path = "/todos")
     public String showList(Model model) {

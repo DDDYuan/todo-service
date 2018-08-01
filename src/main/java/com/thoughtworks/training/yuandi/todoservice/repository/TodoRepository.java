@@ -9,6 +9,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -30,6 +31,6 @@ public class TodoRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return Collections.emptyList();
     }
 }

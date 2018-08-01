@@ -6,9 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +14,7 @@ public class Todo {
     private int id;
     private String value;
     private boolean checked;
+    private String timestamp;
 
     @JsonProperty
     private boolean visible() {
@@ -26,10 +24,5 @@ public class Todo {
     @JsonProperty
     private boolean editable() {
         return false;
-    }
-
-    @JsonProperty
-    private String timestamp() {
-        return DateFormat.getDateTimeInstance().format(new Date());
     }
 }

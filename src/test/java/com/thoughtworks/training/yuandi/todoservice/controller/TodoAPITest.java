@@ -30,7 +30,7 @@ public class TodoAPITest {
 
     @Test
     public void shouldReturnItemList() throws Exception {
-        when(todoRepository.list()).thenReturn(Collections.singletonList(new Todo(1, "content", false)));
+        when(todoRepository.list()).thenReturn(Collections.singletonList(new Todo(1, "content", false, "123")));
 
         mockMvc.perform(get("/todos"))
                 .andExpect(status().isOk())

@@ -17,11 +17,19 @@ public class TodoService {
         this.todoRepository = todoRepository;
     }
 
-    public List<Todo> getAll() {
+    public List<Todo> findAll() {
         return todoRepository.findAll();
     }
 
-    public Todo getById(Integer id) {
+    public Todo findById(Integer id) {
         return todoRepository.findOne(id);
+    }
+
+    public void save(Todo todo) {
+        todoRepository.save(todo);
+    }
+
+    public void delete(Integer id) {
+        todoRepository.delete(id);
     }
 }

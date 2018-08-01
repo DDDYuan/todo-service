@@ -18,10 +18,10 @@ public class TodoService {
     }
 
     public List<Todo> getAll() {
-        return todoRepository.list();
+        return todoRepository.findAll();
     }
 
     public Todo getById(Integer id) {
-        return todoRepository.list().stream().filter(todo -> todo.getId() == id).findFirst().get();
+        return todoRepository.findAll().stream().filter(todo -> todo.getId() == id).findFirst().get();
     }
 }

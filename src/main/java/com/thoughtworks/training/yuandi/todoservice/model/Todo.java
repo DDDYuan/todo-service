@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -21,7 +22,7 @@ public class Todo {
     private int id;
     private String value;
     private boolean checked;
-    private String timestamp;
+    private Date timestamp;
 
     @JsonProperty
     private boolean visible() {

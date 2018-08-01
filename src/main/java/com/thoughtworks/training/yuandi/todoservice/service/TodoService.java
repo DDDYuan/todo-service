@@ -22,6 +22,6 @@ public class TodoService {
     }
 
     public Todo getById(Integer id) {
-        return todoRepository.findAll().stream().filter(todo -> todo.getId() == id).findFirst().get();
+        return todoRepository.findOne(id);
     }
 }

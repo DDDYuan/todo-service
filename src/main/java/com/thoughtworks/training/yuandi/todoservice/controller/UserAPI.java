@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -26,6 +27,11 @@ public class UserAPI {
     @GetMapping
     public List<User> getAllUsers() {
         return userService.findAll();
+    }
+
+    @GetMapping("/logged")
+    public User getLoggedUser(Principal user){
+        return userService.findByName(user.getName());
     }
 
     @GetMapping("/{id}")

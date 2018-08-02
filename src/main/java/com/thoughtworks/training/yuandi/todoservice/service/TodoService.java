@@ -25,20 +25,20 @@ public class TodoService {
         return todoRepository.findOne(id);
     }
 
-    public void save(Todo todo) {
-        todoRepository.save(todo);
+    public Todo save(Todo todo) {
+        return todoRepository.save(todo);
     }
 
     public void delete(Integer id) {
         todoRepository.delete(id);
     }
 
-    public void update(Integer id, Todo todo) {
+    public Todo update(Integer id, Todo todo) {
         Todo originalTodo = todoRepository.findOne(id);
         originalTodo.setChecked(todo.isChecked());
         originalTodo.setValue(todo.getValue());
         originalTodo.setTimestamp(todo.getTimestamp());
         originalTodo.setTasks(todo.getTasks());
-        todoRepository.save(originalTodo);
+        return todoRepository.save(originalTodo);
     }
 }

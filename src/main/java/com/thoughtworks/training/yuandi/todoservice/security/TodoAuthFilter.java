@@ -32,7 +32,11 @@ public class TodoAuthFilter extends OncePerRequestFilter {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (!StringUtils.isEmpty(token)) {
             if (validateToken(token)) {
-                SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("user", null, Collections.emptyList()));
+                SecurityContextHolder.getContext().setAuthentication(
+                        new UsernamePasswordAuthenticationToken(
+                                "user",
+                                null,
+                                Collections.emptyList()));
             }
         }
         filterChain.doFilter(request, response);

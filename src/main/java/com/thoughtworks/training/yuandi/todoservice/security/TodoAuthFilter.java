@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -29,7 +30,7 @@ public class TodoAuthFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if (!token.isEmpty()) {
+        if (!StringUtils.isEmpty(token)) {
             if (validateToken(token)) {
                 SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("user", null, Collections.emptyList()));
             }

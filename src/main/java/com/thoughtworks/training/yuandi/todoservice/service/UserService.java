@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -33,6 +34,7 @@ public class UserService {
     }
 
     public boolean verify(String username, String password) {
-        return userRepository.findByUsernameEquals(username).getPassword().equals(password);
+        Optional<User> user = userRepository.findByUsernameEquals(username);
+        return user.isPresent() && password.equals(user.get().getPassword());
     }
 }

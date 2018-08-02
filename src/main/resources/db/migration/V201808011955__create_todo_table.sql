@@ -3,5 +3,6 @@ CREATE TABLE todo(
   value TEXT,
   checked BOOL,
   timestamp DATETIME,
+  user_id int,
   deleted BOOL default false
 );

@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collections;
+import java.util.Date;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -30,7 +31,7 @@ public class TodoAPITest {
 
     @Test
     public void shouldReturnItemList() throws Exception {
-        when(todoRepository.list()).thenReturn(Collections.singletonList(new Todo(1, "content", false, "123")));
+        when(todoRepository.findAll()).thenReturn(Collections.singletonList(new Todo(1, "content", false, new Date(), Collections.emptyList())));
 
         mockMvc.perform(get("/todos"))
                 .andExpect(status().isOk())

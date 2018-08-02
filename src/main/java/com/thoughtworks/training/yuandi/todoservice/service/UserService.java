@@ -31,4 +31,8 @@ public class UserService {
     public void delete(Integer id) {
         userRepository.delete(id);
     }
+
+    public boolean verify(String username, String password) {
+        return userRepository.findByUsernameEquals(username).getPassword().equals(password);
+    }
 }

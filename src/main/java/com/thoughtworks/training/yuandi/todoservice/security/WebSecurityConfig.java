@@ -16,9 +16,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UnauthorizedEntryPoint unauthorizedEntryPoint;
 
+    private final TodoAuthFilter todoAuthFilter;
+
     @Autowired
-    public WebSecurityConfig(UnauthorizedEntryPoint unauthorizedEntryPoint) {
+    public WebSecurityConfig(UnauthorizedEntryPoint unauthorizedEntryPoint, TodoAuthFilter todoAuthFilter) {
         this.unauthorizedEntryPoint = unauthorizedEntryPoint;
+        this.todoAuthFilter = todoAuthFilter;
     }
 
     @Override
@@ -27,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests().antMatchers(HttpMethod.POST, "/users", "/login").permitAll()
                 .anyRequest().authenticated()
-                .and().addFilterBefore(new TodoAuthFilter(), UsernamePasswordAuthenticationFilter.class)
+                .and().addFilterBefore(todoAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint);
     }
 }

@@ -9,6 +9,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,6 +32,8 @@ public class Todo {
     private String value;
     private boolean checked;
     private Date timestamp;
+    @Column(columnDefinition = "user_id")
+    private int userId;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "todo_id")

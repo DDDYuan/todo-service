@@ -1,6 +1,5 @@
 package com.thoughtworks.training.yuandi.todoservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +19,5 @@ public class User {
     @GeneratedValue
     private int id;
     private String username;
-    @JsonIgnore
     private String password;
 }

@@ -11,18 +11,28 @@ import java.util.List;
 public class TodoService {
 
     private final TodoRepository todoRepository;
+    private final UserService userService;
 
     @Autowired
-    public TodoService(TodoRepository todoRepository) {
+    public TodoService(TodoRepository todoRepository, UserService userService) {
         this.todoRepository = todoRepository;
+        this.userService = userService;
     }
 
     public List<Todo> findAll() {
         return todoRepository.findAll();
     }
 
+    public List<Todo> findAll(String username) {
+        return todoRepository.findAllByUserIdEquals(userService.findByName(username).getId());
+    }
+
     public Todo findById(Integer id) {
         return todoRepository.findOne(id);
+    }
+
+    public Todo findById(Integer id, String username) {
+        return todoRepository.findByIdEqualsAndUserIdEquals(id, userService.findByName(username).getId());
     }
 
     public Todo save(Todo todo) {

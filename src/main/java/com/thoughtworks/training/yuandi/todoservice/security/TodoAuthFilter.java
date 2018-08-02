@@ -1,7 +1,9 @@
 package com.thoughtworks.training.yuandi.todoservice.security;
 
 import com.thoughtworks.training.yuandi.todoservice.service.UserService;
+import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +22,9 @@ import java.util.Collections;
 public class TodoAuthFilter extends OncePerRequestFilter {
     private final UserService userService;
 
+    @Value("${secretkey}")
+    private String secretKey;
+
     @Autowired
     public TodoAuthFilter(UserService userService) {
         this.userService = userService;
@@ -31,21 +36,17 @@ public class TodoAuthFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (!StringUtils.isEmpty(token)) {
-            if (validateToken(token)) {
+            try {
+                String username = (String) Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(token).getBody().get("username");
                 SecurityContextHolder.getContext().setAuthentication(
                         new UsernamePasswordAuthenticationToken(
-                                "user",
+                                username,
                                 null,
                                 Collections.emptyList()));
+            } catch (Exception ignored) {
+
             }
         }
         filterChain.doFilter(request, response);
-    }
-
-    private boolean validateToken(String token) {
-        String[] userPass = token.split(":");
-        String username = userPass[0];
-        String password = userPass[1];
-        return userService.verify(username, password);
     }
 }

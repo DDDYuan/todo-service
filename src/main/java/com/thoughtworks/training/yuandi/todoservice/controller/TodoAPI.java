@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -25,13 +26,13 @@ public class TodoAPI {
     }
 
     @GetMapping
-    public List<Todo> getTodoList() {
-        return todoService.findAll();
+    public List<Todo> getTodoList(Principal user) {
+        return todoService.findAll(user.getName());
     }
 
     @GetMapping("/{id}")
-    public Todo getTodoById(@PathVariable Integer id) {
-        return todoService.findById(id);
+    public Todo getTodoById(@PathVariable Integer id, Principal user) {
+        return todoService.findById(id, user.getName());
     }
 
     @PostMapping

@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/todos")
 public class TodoAPI {
     private final TodoService todoService;
 
@@ -22,27 +24,27 @@ public class TodoAPI {
         this.todoService = todoService;
     }
 
-    @GetMapping(path = "/todos")
+    @GetMapping
     public List<Todo> getTodoList() {
         return todoService.findAll();
     }
 
-    @GetMapping(path = "/todos/{id}")
+    @GetMapping("/{id}")
     public Todo getTodoById(@PathVariable Integer id) {
         return todoService.findById(id);
     }
 
-    @PostMapping(path = "/todos")
+    @PostMapping
     public void createTodo(@RequestBody Todo todo) {
         todoService.save(todo);
     }
 
-    @DeleteMapping(path = "/todos/{id}")
+    @DeleteMapping("/{id}")
     public void deleteTodo(@PathVariable Integer id) {
         todoService.delete(id);
     }
 
-    @PutMapping(path = "/todos/{id}")
+    @PutMapping("/{id}")
     public void updateTodo(@PathVariable Integer id, @RequestBody Todo todo) {
         todoService.update(id, todo);
     }

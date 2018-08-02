@@ -44,11 +44,6 @@ public class TodoAPI {
 
     @PutMapping(path = "/todos/{id}")
     public void updateTodo(@PathVariable Integer id, @RequestBody Todo todo) {
-        Todo originalTodo = todoService.findById(id);
-        originalTodo.setChecked(todo.isChecked());
-        originalTodo.setValue(todo.getValue());
-        originalTodo.setTimestamp(todo.getTimestamp());
-        originalTodo.setTasks(todo.getTasks());
-        todoService.save(originalTodo);
+        todoService.update(id, todo);
     }
 }

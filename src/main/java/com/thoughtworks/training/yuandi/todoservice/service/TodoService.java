@@ -32,4 +32,13 @@ public class TodoService {
     public void delete(Integer id) {
         todoRepository.delete(id);
     }
+
+    public void update(Integer id, Todo todo) {
+        Todo originalTodo = todoRepository.findOne(id);
+        originalTodo.setChecked(todo.isChecked());
+        originalTodo.setValue(todo.getValue());
+        originalTodo.setTimestamp(todo.getTimestamp());
+        originalTodo.setTasks(todo.getTasks());
+        todoRepository.save(originalTodo);
+    }
 }

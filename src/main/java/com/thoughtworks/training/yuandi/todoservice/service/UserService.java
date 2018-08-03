@@ -60,9 +60,4 @@ public class UserService {
             put("username", username);
         }}).signWith(SignatureAlgorithm.HS512, secretKey.getBytes()).compact();
     }
-
-    public User findByToken(String token) {
-        String username = (String) Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(token).getBody().get("username");
-        return findByName(username);
-    }
 }

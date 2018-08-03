@@ -1,8 +1,6 @@
 package com.thoughtworks.training.yuandi.todoservice.security;
 
-import com.thoughtworks.training.yuandi.todoservice.service.UserService;
 import io.jsonwebtoken.Jwts;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,15 +18,8 @@ import java.util.Collections;
 
 @Component
 public class TodoAuthFilter extends OncePerRequestFilter {
-    private final UserService userService;
-
     @Value("${secretkey}")
     private String secretKey;
-
-    @Autowired
-    public TodoAuthFilter(UserService userService) {
-        this.userService = userService;
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -37,7 +28,7 @@ public class TodoAuthFilter extends OncePerRequestFilter {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (!StringUtils.isEmpty(token)) {
             try {
-                String username = userService.findByToken(token).getUsername();
+                String username = (String) Jwts.parser().setSigningKey(secretKey.getBytes()).parseClaimsJws(token).getBody().get("username");
                 SecurityContextHolder.getContext().setAuthentication(
                         new UsernamePasswordAuthenticationToken(
                                 username,

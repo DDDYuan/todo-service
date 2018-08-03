@@ -32,7 +32,6 @@ public class Todo {
     private String value;
     private boolean checked;
     private Date timestamp;
-    @Column(columnDefinition = "user_id")
     private int userId;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -48,4 +47,8 @@ public class Todo {
     private boolean editable() {
         return false;
     }
+
+
+    @Builder.Default
+    private boolean deleted = false;
 }

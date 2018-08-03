@@ -26,4 +26,7 @@ public class User {
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    @Builder.Default
+    private boolean deleted = false;
 }

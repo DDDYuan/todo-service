@@ -23,4 +23,7 @@ public class Task {
     @GeneratedValue
     private int id;
     private String content;
+
+    @Builder.Default
+    private boolean deleted = false;
 }

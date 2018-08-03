@@ -1,2 +1,2 @@
-INSERT INTO `user` (`username`, `password`) VALUES ("ddd", "ddd");
-INSERT INTO `user` (`username`, `password`) VALUES ("dddd", "dddd");
+INSERT INTO `user` (`username`, `password`) VALUES ('ddd', '$2a$10$tIgwB72IdUinL3llZFYbcOuNPr5UfjOg9zoowsxh/XtVmTDuEm5Im');
+INSERT INTO `user` (`username`, `password`) VALUES ('dddd', '$2a$10$nsTNmxPGMr.bb.Kxpb0I2OaWgu3E.VWZtx9jy1Ry.MEIbF5kGXY.e');

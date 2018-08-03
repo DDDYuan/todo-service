@@ -37,11 +37,12 @@ public class TodoAPITest {
 
     @MockBean
     private UserService userService;
+    private User userFixture = new User(1, "ddd", "ddd");
 
     @Test
     public void shouldReturnItemList() throws Exception {
         SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("ddd", null, Collections.emptyList()));
-        when(userService.findByName("ddd")).thenReturn(new User(1, "ddd", "ddd"));
+        when(userService.findByName("ddd")).thenReturn(userFixture);
         when(todoRepository.findAllByUserIdEquals(1)).thenReturn(Collections.singletonList(new Todo(1, "content", false, new Date(), 1, Collections.emptyList())));
 
         mockMvc.perform(get("/todos"))
@@ -59,7 +60,7 @@ public class TodoAPITest {
 
     @Test
     public void shouldReturnListWhenAuthenticated() throws Exception {
-        when(userService.findByName("ddd")).thenReturn(new User(1, "ddd", "ddd"));
+        when(userService.findByName("ddd")).thenReturn(userFixture);
         when(todoRepository.findAllByUserIdEquals(1)).thenReturn(Collections.singletonList(new Todo(1, "content", false, new Date(), 1, Collections.emptyList())));
 
         mockMvc.perform(get("/todos")
